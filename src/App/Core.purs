@@ -9,5 +9,6 @@ main :: forall m. MonadApp m => m Unit
 main = do
   config <- getConfig
   case config.command of
-    CmdHello {} -> log "Hello!"
+    CmdHello {name} -> log ("Hello, " <> name)
     CmdVersion -> log "Version"
+
