@@ -2,7 +2,7 @@ module App.Types where
 
 import Prelude
 
-type AppEnv =
+type AppConfig =
   { command :: AppCommand
   }
 

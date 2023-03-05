@@ -1,6 +1,7 @@
 {
   "name": "cli-template2023",
   "version": "1.0.0",
+  "type": "module",
   "main": "dist/index.js",
   "author": "Michael Bock <no-day@posteo.net>",
   "license": "MIT",

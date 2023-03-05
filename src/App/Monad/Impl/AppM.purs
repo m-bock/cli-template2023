@@ -7,7 +7,7 @@ module App.Monad.Impl.AppM
 import Prelude
 
 import App.Monad.Class.App (class MonadApp)
-import App.Types (AppEnv, AppError)
+import App.Types (AppConfig, AppError)
 import Control.Monad.Error.Class (class MonadError, class MonadThrow)
 import Control.Monad.Except (ExceptT, runExceptT)
 import Control.Monad.Reader (ReaderT, ask, runReaderT)
@@ -20,7 +20,7 @@ import Effect.Class.Console as E
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff as FSA
 
-newtype AppM a = AppM (ReaderT AppEnv (ExceptT AppError Aff) a)
+newtype AppM a = AppM (ReaderT AppConfig (ExceptT AppError Aff) a)
 
 derive newtype instance Bind AppM
 
@@ -38,7 +38,7 @@ derive newtype instance MonadThrow AppError AppM
 
 instance MonadApp AppM where
   readFile x = AppM $ liftAff $ FSA.readTextFile UTF8 x
-  getEnv = AppM ask
+  getConfig = AppM ask
   log = AppM <<< E.log
 
 data Result a
@@ -46,7 +46,7 @@ data Result a
   | RetAppError AppError
   | RetOk a
 
-runAppM :: forall a. AppEnv -> AppM a -> (Result a -> Effect Unit) -> Effect (Fiber Unit)
+runAppM :: forall a. AppConfig -> AppM a -> (Result a -> Effect Unit) -> Effect (Fiber Unit)
 runAppM env (AppM m) cb = m
   # flip runReaderT env
   # runExceptT

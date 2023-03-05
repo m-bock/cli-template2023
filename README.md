@@ -3,4 +3,8 @@
 CLI template for PureScript.
 
 - MTL-Style
-- optparse
+- optparse (incl. subcommands)
+
+Coming soon:
+- env vars with typed env
+- type safe paths with pathy
