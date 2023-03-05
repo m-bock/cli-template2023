@@ -8,3 +8,5 @@ CLI template for PureScript.
 Coming soon:
 - env vars with typed env
 - type safe paths with pathy
+- run tests in CI (GH actions)
+- debug flag
