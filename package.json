@@ -8,5 +8,8 @@
     "esbuild": "^0.17.11",
     "purescript": "^0.15.7",
     "spago": "^0.20.9"
+  },
+  "dependencies": {
+    "pathy": "^1.1.0"
   }
 }
